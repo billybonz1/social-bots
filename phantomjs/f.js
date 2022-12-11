@@ -79,8 +79,7 @@ class FacebookBot {
             setTimeout(() => {
               this.browser.visit(url,() => {
                 this.browser.fill('body', job.message).then(() => {
-                  this.browser.pressButton('input[name=send]',() => {
-
+                  this.browser.pressButton('[type=submit][name]',() => {
                     this.con.query('UPDATE jobs SET status=1 WHERE id='+job.id, (err, result) => {
                       this.jobs++;
                       if(this.jobs === 10){
@@ -94,7 +93,7 @@ class FacebookBot {
                   });
                 })
               });
-            }, 200);
+            }, 300);
           }else{
             this.con.query('UPDATE jobs SET status=2 WHERE id='+job.id, (err, result) => {
               this.jobs++;
